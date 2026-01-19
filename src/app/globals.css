@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark text-white antialiased;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Gold button variant */
+  .btn-gold {
+    @apply px-6 py-3 font-vt323 text-lg tracking-wider uppercase;
+    @apply bg-gold/10 border border-gold/40 rounded-lg;
+    @apply text-gold transition-all duration-200;
+    @apply hover:bg-gold/20 hover:shadow-gold-glow;
+  }
+
+  /* Card with gold border */
+  .card-gold {
+    @apply bg-dark-medium/80 border-2 border-gold rounded-xl;
+    @apply shadow-[0_0_30px_rgba(255,212,71,0.2),inset_0_0_15px_rgba(255,212,71,0.1)];
+  }
+
+  /* Section container */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-20;
+  }
+
+  /* Gold text glow */
+  .text-gold-glow {
+    text-shadow: 0 0 20px rgba(255, 212, 71, 0.6);
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar for webkit browsers */
+  .scrollbar-gold::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-gold::-webkit-scrollbar-track {
+    @apply bg-dark-medium rounded;
+  }
+
+  .scrollbar-gold::-webkit-scrollbar-thumb {
+    @apply bg-gold/40 rounded hover:bg-gold/60;
+  }
+}
+
+/* Dashboard Animations */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulse-badge {
+  0%, 100% { box-shadow: 0 0 15px currentColor; }
+  50% { box-shadow: 0 0 25px currentColor, 0 0 40px currentColor; }
+}
+
+@keyframes badge-pop {
+  0% { transform: translateX(-50%) scale(0); opacity: 0; }
+  50% { transform: translateX(-50%) scale(1.2); }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+@keyframes rig-reveal {
+  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes text-reveal {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes stats-reveal {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes confetti-fall {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+  100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0.5); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.4s ease-out;
+}
+
+/* ============================================
+   CLEAN HOVER BEHAVIOR - NO PULSE/SCALE
+   ============================================ */
+
+/* Kill any unwanted transform/scale on hover globally */
+a:hover,
+button:hover {
+  transform: none !important;
+  scale: none !important;
+  animation: none !important;
+}
+
+/* Subtle shine effect on interactive elements */
+a,
+button {
+  transition: filter 0.2s ease;
+}
+
+a:hover,
+button:hover {
+  filter: brightness(1.1);
+}
+
+/* Disable the pulse-slow animation entirely */
+.animate-pulse-slow {
+  animation: none;
+}
