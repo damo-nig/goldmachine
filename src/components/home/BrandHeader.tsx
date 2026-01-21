@@ -15,8 +15,8 @@ export default function BrandHeader() {
   return (
     <header
       className="
-        w-full max-w-4xl mx-auto mt-8 md:mt-[60px] 
-        px-5 py-10 md:px-[60px] md:py-20
+        w-full max-w-[90%] md:max-w-4xl mx-auto mt-2 md:mt-[60px] 
+        px-4 py-5 md:px-[60px] md:py-20
         rounded-xl bg-[rgba(10,10,10,0.95)] border-2 border-gold
         text-center z-[2]
       "
@@ -48,12 +48,12 @@ export default function BrandHeader() {
       </motion.h1>
 
       {/* Subtitle */}
-      <p className="text-gold font-vt323 text-[clamp(1rem,3vw,1.25rem)] tracking-[3px] mt-4 opacity-90 uppercase">
+      <p className="text-gold font-vt323 text-[clamp(1rem,3vw,1.25rem)] tracking-[3px] mt-2 md:mt-4 opacity-90 uppercase">
         Automated Gold Distribution Protocol
       </p>
 
       {/* Pre-Launch Status */}
-      <div className="flex items-center justify-center gap-2.5 mt-6">
+      <div className="flex items-center justify-center gap-2.5 mt-3 md:mt-6">
         <motion.span
           animate={{
             opacity: [1, 0.3, 1],
@@ -77,7 +77,7 @@ export default function BrandHeader() {
       {/* Copy CA Button */}
       <div
         onClick={handleCopyCA}
-        className="mt-7 px-8 py-4 bg-gold/10 border-2 border-gold rounded-lg cursor-pointer transition-all duration-200 inline-flex items-center justify-center gap-2.5 hover:bg-gold/20"
+        className="mt-4 px-4 py-3 md:mt-7 md:px-8 md:py-4 bg-gold/10 border-2 border-gold rounded-lg cursor-pointer transition-all duration-200 inline-flex items-center justify-center gap-2.5 hover:bg-gold/20"
       >
         {/* Copy Icon */}
         <motion.svg

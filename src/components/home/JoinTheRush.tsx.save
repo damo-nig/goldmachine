@@ -1,0 +1,211 @@
+code ~/Desktop/goldmachine/src/components/home/JoinTheRush.tsx
+'use client'
+
+import { useState } from 'react'
+
+const TelegramIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+  </svg>
+)
+
+const XIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+)
+
+const SOCIAL_LINKS = [
+  { label: 'Telegram', href: 'https://t.me/goldmachinebsc', Icon: TelegramIcon },
+  { label: 'Twitter', href: 'https://twitter.com/goldloading', Icon: XIcon },
+]
+
+export default function JoinTheRush() {
+  const [hoveredButton, setHoveredButton] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyCA = () => {
+    navigator.clipboard.writeText('Coming Soon On BNB Chain')
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <section className="px-5 md:px-10 py-10 md:py-16 max-w-[1200px] mx-auto">
+      <div
+        className="border-[3px] border-gold rounded-xl px-6 py-12 md:px-16 md:py-16 text-center"
+        style={{
+          background: 'linear-gradient(135deg, rgba(20, 20, 10, 0.95) 0%, rgba(10, 10, 5, 0.98) 100%)',
+          boxShadow: '0 0 50px rgba(255, 212, 71, 0.4), inset 0 0 30px rgba(255, 212, 71, 0.1)',
+        }}
+      >
+        <h2
+          className="font-vt323 text-3xl md:text-[4rem] text-gold uppercase tracking-[4px] md:tracking-[8px] mb-4 md:mb-6"
+          style={{ textShadow: '0 0 25px rgba(255, 212, 71, 0.7)' }}
+        >
+          JOIN THE GOLD RUSH
+        </h2>
+
+        <p className="font-vt323 text-lg md:text-[1.4rem] text-[#E8C85C] mb-8 md:mb-10 tracking-[1px] max-w-[600px] mx-auto leading-relaxed">
+          Be part of the first automated gold distribution protocol on BNB Chain. Join our community and stay updated on the launch.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+          {SOCIAL_LINKS.map((link) => {
+            const isHovered = hoveredButton === link.label
+            return (
+              
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 font-vt323 text-lg md:text-[1.3rem] uppercase tracking-[2px] rounded-lg border-[3px] no-underline transition-all duration-200 flex items-center justify-center gap-3"
+                style={{
+                  background: isHovered ? 'rgba(255, 212, 71, 0.2)' : 'rgba(255, 212, 71, 0.1)',
+                  borderColor: '#FFD447',
+                  color: '#FFD447',
+                  boxShadow: isHovered ? '0 0 40px rgba(255, 212, 71, 0.6)' : '0 0 20px rgba(255, 212, 71, 0.3)',
+                  transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+                }}
+                onMouseEnter={() => setHoveredButton(link.label)}
+                onMouseLeave={() => setHoveredButton(null)}
+              >
+                <link.Icon />
+                {link.label}
+              </a>
+            )
+          })}
+        </div>
+
+        <div
+          onClick={handleCopyCA}
+          className="mt-8 md:mt-10 px-8 py-4 bg-gold/10 border-2 border-gold rounded-lg cursor-pointer transition-all duration-200 inline-flex items-center justify-center gap-2.5 hover:bg-gold/20"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={copied ? '#00FF66' : '#FFD447'}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-5 h-5"
+            style={{ filter: copied ? 'drop-shadow(0 0 8px #00FF66)' : 'drop-shadow(0 0 5px rgba(255,215,0,0.4))' }}
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          <span className={`text-sm tracking-[1px] font-vt323 uppercase ${copied ? 'text-[#00FF66]' : 'text-gold'}`}>
+            {copied ? '✓ Copied!' : 'CA: Coming Soon On BNB Chain'}
+          </span>
+        </div>
+      </div>
+    </section>
+  )
+}
+rm ~/Desktop/goldmachine/src/components/home/JoinTheRush.tsx
+nano ~/Desktop/goldmachine/src/components/home/JoinTheRush.tsx
+'use client'
+
+import { useState } from 'react'
+
+const TelegramIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+  </svg>
+)
+
+const XIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+)
+
+const SOCIAL_LINKS = [
+  { label: 'Telegram', href: 'https://t.me/goldmachinebsc', Icon: TelegramIcon },
+  { label: 'Twitter', href: 'https://twitter.com/goldloading', Icon: XIcon },
+]
+
+export default function JoinTheRush() {
+  const [hoveredButton, setHoveredButton] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyCA = () => {
+    navigator.clipboard.writeText('Coming Soon On BNB Chain')
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <section className="px-5 md:px-10 py-10 md:py-16 max-w-[1200px] mx-auto">
+      <div
+        className="border-[3px] border-gold rounded-xl px-6 py-12 md:px-16 md:py-16 text-center"
+        style={{
+          background: 'linear-gradient(135deg, rgba(20, 20, 10, 0.95) 0%, rgba(10, 10, 5, 0.98) 100%)',
+          boxShadow: '0 0 50px rgba(255, 212, 71, 0.4), inset 0 0 30px rgba(255, 212, 71, 0.1)',
+        }}
+      >
+        <h2
+          className="font-vt323 text-3xl md:text-[4rem] text-gold uppercase tracking-[4px] md:tracking-[8px] mb-4 md:mb-6"
+          style={{ textShadow: '0 0 25px rgba(255, 212, 71, 0.7)' }}
+        >
+          JOIN THE GOLD RUSH
+        </h2>
+
+        <p className="font-vt323 text-lg md:text-[1.4rem] text-[#E8C85C] mb-8 md:mb-10 tracking-[1px] max-w-[600px] mx-auto leading-relaxed">
+          Be part of the first automated gold distribution protocol on BNB Chain. Join our community and stay updated on the launch.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+          {SOCIAL_LINKS.map((link) => {
+            const isHovered = hoveredButton === link.label
+            return (
+              
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 font-vt323 text-lg md:text-[1.3rem] uppercase tracking-[2px] rounded-lg border-[3px] no-underline transition-all duration-200 flex items-center justify-center gap-3"
+                style={{
+                  background: isHovered ? 'rgba(255, 212, 71, 0.2)' : 'rgba(255, 212, 71, 0.1)',
+                  borderColor: '#FFD447',
+                  color: '#FFD447',
+                  boxShadow: isHovered ? '0 0 40px rgba(255, 212, 71, 0.6)' : '0 0 20px rgba(255, 212, 71, 0.3)',
+                  transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+                }}
+                onMouseEnter={() => setHoveredButton(link.label)}
+                onMouseLeave={() => setHoveredButton(null)}
+              >
+                <link.Icon />
+                {link.label}
+              </a>
+            )
+          })}
+        </div>
+
+        <div
+          onClick={handleCopyCA}
+          className="mt-8 md:mt-10 px-8 py-4 bg-gold/10 border-2 border-gold rounded-lg cursor-pointer transition-all duration-200 inline-flex items-center justify-center gap-2.5 hover:bg-gold/20"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={copied ? '#00FF66' : '#FFD447'}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-5 h-5"
+            style={{ filter: copied ? 'drop-shadow(0 0 8px #00FF66)' : 'drop-shadow(0 0 5px rgba(255,215,0,0.4))' }}
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          <span className={`text-sm tracking-[1px] font-vt323 uppercase ${copied ? 'text-[#00FF66]' : 'text-gold'}`}>
+            {copied ? '✓ Copied!' : 'CA: Coming Soon On BNB Chain'}
+          </span>
+        </div>
+      </div>
+    </section>
+  )
+}

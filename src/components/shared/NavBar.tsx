@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 const NAV_LINKS = [
@@ -8,7 +9,7 @@ const NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Dashboard', href: '/dashboard' },
   { label: 'Calculator', href: '/calculator' },
-  { label: 'Twitter', href: 'https://twitter.com/goldloading', external: true },
+  { label: 'Twitter', href: 'https://x.com/GoldMachinebsc', external: true },
   { label: 'Telegram', href: 'https://t.me/goldmachinebsc', external: true },
 ]
 
@@ -19,8 +20,14 @@ const formatAddress = (address: string): string => {
 }
 
 export default function NavBar() {
+  const pathname = usePathname()
+  
+  // Hide navbar on genesis page
+  if (pathname === '/genesis') return null
+
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
   const [isWalletHovered, setIsWalletHovered] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -160,7 +167,7 @@ export default function NavBar() {
           >
             <span className="w-2.5 h-2.5 rounded-full bg-[#666]" />
             <span className="font-vt323 text-[1.15rem] text-[#888] tracking-[1px]">
-              No Wallet Connected
+              Connect
             </span>
           </Link>
         )}
@@ -172,6 +179,24 @@ export default function NavBar() {
           className="fixed inset-0 -z-10"
           onClick={() => setShowDropdown(false)}
         />
+      )}
+      {/* Mobile Hamburger */}
+      <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden flex flex-col gap-1.5 p-2">
+        <span className="block w-6 h-0.5 bg-gold" />
+        <span className="block w-6 h-0.5 bg-gold" />
+        <span className="block w-6 h-0.5 bg-gold" />
+      </button>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-x-0 top-[75px] bottom-0 z-[999] bg-[#0a0a05] p-6 flex flex-col gap-2">
+          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="font-vt323 text-xl text-gray-300 py-3 px-4">Home</Link>
+          <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="font-vt323 text-xl text-gray-300 py-3 px-4">About</Link>
+          <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="font-vt323 text-xl text-gray-300 py-3 px-4">Dashboard</Link>
+          <Link href="/calculator" onClick={() => setMobileMenuOpen(false)} className="font-vt323 text-xl text-gray-300 py-3 px-4">Calculator</Link>
+          <a href="https://x.com/GoldMachinebsc" target="_blank" className="font-vt323 text-xl text-gray-300 py-3 px-4">Twitter ↗</a>
+          <a href="https://t.me/goldmachinebsc" target="_blank" className="font-vt323 text-xl text-gray-300 py-3 px-4">Telegram ↗</a>
+        </div>
       )}
     </nav>
   )

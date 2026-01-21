@@ -1,5 +1,7 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
+
 import { motion } from 'framer-motion'
 
 const FOOTER_LINKS = [
@@ -9,8 +11,13 @@ const FOOTER_LINKS = [
 ]
 
 export default function Footer() {
+  const pathname = usePathname()
+  
+  // Hide footer on genesis page
+  if (pathname === '/genesis') return null
+
   return (
-    <footer className="w-full max-w-[1200px] mx-auto bg-[rgba(10,10,10,0.95)] border-2 border-gold rounded-[10px] py-10 pb-[60px] text-center text-gold font-vt323 uppercase tracking-[2px] relative shadow-[0_0_60px_rgba(255,212,71,0.4),inset_0_0_25px_rgba(255,212,71,0.2)]">
+    <footer className="w-[calc(100%-32px)] max-w-[1200px] mx-auto mb-8 bg-[rgba(10,10,10,0.95)] border-2 border-gold rounded-[10px] py-10 pb-[60px] text-center text-gold font-vt323 uppercase tracking-[2px] relative shadow-[0_0_60px_rgba(255,212,71,0.4),inset_0_0_25px_rgba(255,212,71,0.2)]">
       {/* Animated Divider Glow */}
       <motion.div
         animate={{ opacity: [0.3, 1, 0.3] }}
