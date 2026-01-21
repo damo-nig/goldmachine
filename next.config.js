@@ -38,6 +38,33 @@ const nextConfig = {
       ],
     }
   },
+  // Redirect /genesis on main domain to subdomain
+  async redirects() {
+    return [
+      {
+        source: '/genesis',
+        has: [
+          {
+            type: 'host',
+            value: 'goldmachine.xyz',
+          },
+        ],
+        destination: 'https://genesis.goldmachine.xyz',
+        permanent: true,
+      },
+      {
+        source: '/genesis',
+        has: [
+          {
+            type: 'host',
+            value: 'www.goldmachine.xyz',
+          },
+        ],
+        destination: 'https://genesis.goldmachine.xyz',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
