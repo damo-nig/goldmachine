@@ -21,6 +21,23 @@ const nextConfig = {
       },
     ]
   },
+  // Rewrite genesis subdomain to /genesis page
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/',
+          has: [
+            {
+              type: 'host',
+              value: 'genesis.goldmachine.xyz',
+            },
+          ],
+          destination: '/genesis',
+        },
+      ],
+    }
+  },
 }
 
 module.exports = nextConfig
