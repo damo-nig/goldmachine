@@ -22,9 +22,6 @@ const formatAddress = (address: string): string => {
 export default function NavBar() {
   const pathname = usePathname()
   
-  // Hide navbar on genesis page
-  if (pathname === '/genesis') return null
-
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -72,6 +69,9 @@ export default function NavBar() {
     window.dispatchEvent(new CustomEvent('walletChanged', { detail: null }))
   }
 
+
+  // Hide navbar on genesis page/subdomain
+  if (pathname === "/genesis" || (mounted && typeof window !== "undefined" && window.location.hostname === "genesis.goldmachine.xyz")) return null
   return (
     <nav className="fixed top-0 left-0 right-0 z-[1000] h-[75px] px-6 md:px-12 flex items-center justify-between border-b border-gold/20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]" style={{ background: 'linear-gradient(180deg, #0a0a05 0%, #0d0d07 100%)' }}>
       {/* Left section: Logo + Nav Links */}

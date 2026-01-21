@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const FOOTER_LINKS = [
@@ -12,9 +12,15 @@ const FOOTER_LINKS = [
 
 export default function Footer() {
   const pathname = usePathname()
-  
-  // Hide footer on genesis page
-  if (pathname === '/genesis') return null
+  const [isGenesis, setIsGenesis] = useState(false)
+
+  useEffect(() => {
+    if (pathname === '/genesis' || window.location.hostname === 'genesis.goldmachine.xyz') {
+      setIsGenesis(true)
+    }
+  }, [pathname])
+
+  if (isGenesis) return null
 
   return (
     <footer className="w-[calc(100%-32px)] max-w-[1200px] mx-auto mb-8 bg-[rgba(10,10,10,0.95)] border-2 border-gold rounded-[10px] py-10 pb-[60px] text-center text-gold font-vt323 uppercase tracking-[2px] relative shadow-[0_0_60px_rgba(255,212,71,0.4),inset_0_0_25px_rgba(255,212,71,0.2)]">
@@ -43,7 +49,7 @@ export default function Footer() {
       {/* Nav Links */}
       <div className="flex justify-center gap-8 md:gap-[60px] flex-wrap mb-5 text-base opacity-85">
         {FOOTER_LINKS.map((link) => (
-          <a
+          
             key={link.label}
             href={link.url}
             target="_blank"
